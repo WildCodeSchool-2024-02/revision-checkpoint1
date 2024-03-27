@@ -1,0 +1,5 @@
+<?php
+
+define("DSN", "mysql:host=localhost;dbname=db;charset=UTF8");
+define("USER", "test");
+define("PASS", "test");
