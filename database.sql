@@ -1,0 +1,11 @@
+CREATE DATABASE collecteur;
+
+USE collecteur;
+
+CREATE TABLE dette (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    amount INT NOT NULL
+);
+
+DROP TABLE dette;
