@@ -23,6 +23,7 @@ if (!empty($_POST)) {
         $statement->execute();
     }
 }
+var_dump($errors);
 
 ?>
 
@@ -43,12 +44,21 @@ if (!empty($_POST)) {
         <form method="post" class="uk-grid-small" uk-grid>
             <div class="uk-margin uk-width-1-3@s">
                 <label for="name">Le nom du Wilder</label>
-                <input class="uk-input" type="text" placeholder="Yavuz" id="name" name="name">
-                <!-- Si y'a des erreurs que vous affichiez un text rouge avec le nom de l'erreur -->
+                <?php if(!empty($errors['name'])) : ?>
+                    <input class="uk-input uk-form-danger uk-form-width-medium" type="text" placeholder="Yavuz" id="name" name="name">
+                    <p class="uk-text-danger"><?=$errors['name']?> </p>
+                <?php else : ?>
+                    <input class="uk-input" type="text" placeholder="Yavuz" id="name" name="name">
+                <?php endif; ?>
             </div>
             <div class="uk-margin uk-width-1-4@s">
                 <label for="amount">Le montant</label>
-                <input class="uk-input" type="number" placeholder="50" id="amount" name="amount">
+                <?php if(!empty($errors['amount'])) : ?>
+                    <input class="uk-input uk-form-danger uk-form-width-medium" type="number" placeholder="50" id="amount" name="amount">
+                    <p class="uk-text-danger"><?=$errors['amount']?> </p>
+                <?php else : ?>
+                    <input class="uk-input" type="number" placeholder="50" id="amount" name="amount">
+                <?php endif; ?>
             </div>
             <div class="uk-margin uk-width-1-4@s">
                 <button type="submit" class="uk-button uk-button-primary">Ajouter une dette</button>
