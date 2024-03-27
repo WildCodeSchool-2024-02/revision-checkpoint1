@@ -9,10 +9,10 @@ if (!empty($_POST)) {
     $data = array_map('htmlentities', $data);
 
     if (empty($data['name'])) {
-        $errors['name'] =  'Le champ est obligatoire';
+        $errors['name'] =  'Le nom est obligatoire';
     }
     if (empty($data['amount'])) {
-        $errors['amount'] = 'Le champ est obligatoire';
+        $errors['amount'] = 'Le montant est obligatoire';
     }
 
     if (empty($errors)) {
@@ -21,6 +21,7 @@ if (!empty($_POST)) {
         $statement->bindValue(':name', $data['name']);
         $statement->bindValue(':amount', $data['amount'], PDO::PARAM_INT);
         $statement->execute();
+        exit();
     }
 }
 
@@ -40,15 +41,24 @@ if (!empty($_POST)) {
     <main class="uk-container">
         <h1>Le collecteur de dettes du crew PHP</h1>
         <!-- Todo afficher les erreurs -->
+        <?php
+        if (!empty($errors)) {
+            echo "<ul>";
+            foreach ($errors as $error) {
+                echo "<li>$error</li>";
+            }
+            echo "</ul>";
+        }
+        ?>
         <form method="post" class="uk-grid-small" uk-grid>
             <div class="uk-margin uk-width-1-3@s">
                 <label for="name">Le nom du Wilder</label>
-                <input class="uk-input" type="text" placeholder="Yavuz" id="name" name="name">
+                <input class="uk-input uk-form-danger" type="text" placeholder="Yavuz" id="name" name="name">
                 <!-- Si y'a des erreurs que vous affichiez un text rouge avec le nom de l'erreur -->
             </div>
             <div class="uk-margin uk-width-1-4@s">
                 <label for="amount">Le montant</label>
-                <input class="uk-input" type="number" placeholder="50" id="amount" name="amount">
+                <input class="uk-input uk-form-danger" type="number" placeholder="50" id="amount" name="amount">
             </div>
             <div class="uk-margin uk-width-1-4@s">
                 <button type="submit" class="uk-button uk-button-primary">Ajouter une dette</button>
