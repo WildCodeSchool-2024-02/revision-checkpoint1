@@ -23,7 +23,6 @@ if (!empty($_POST)) {
         $statement->execute();
     }
 }
-var_dump($errors);
 
 ?>
 
